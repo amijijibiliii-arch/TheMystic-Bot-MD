@@ -1,5 +1,6 @@
 FROM node:18
 
+# Instalamos librerías necesarias para el bot
 RUN apt-get update && apt-get install -y \
     ffmpeg \
     imagemagick \
@@ -7,9 +8,14 @@ RUN apt-get update && apt-get install -y \
     apt-get clean
 
 WORKDIR /app
+
+# Copiamos archivos y forzamos la instalación
 COPY package.json .
 RUN npm install
+
 COPY . .
 
-
-CMD ["npm", "start"]
+# ESTA LÍNEA ES LA CLAVE: 
+# Obliga a mostrar la consola (donde sale el QR) y no una web
+ENV PORT=7860
+CMD ["node", "index.js"]
