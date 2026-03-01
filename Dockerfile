@@ -1,19 +1,15 @@
-FROM node:lts-buster
+FROM node:18
 
-RUN apt-get update && \
-  apt-get install -y \
-  ffmpeg \
-  imagemagick \
-  webp && \
-  apt-get upgrade -y && \
-  rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    imagemagick \
+    webp && \
+    apt-get clean
 
+WORKDIR /app
 COPY package.json .
-
-RUN npm install && npm install qrcode-terminal
-
+RUN npm install
 COPY . .
 
-EXPOSE 5000
 
-CMD ["node", "index.js"]
+CMD ["npm", "start"]
