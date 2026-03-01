@@ -18,4 +18,4 @@ COPY . .
 # ESTA LÍNEA ES LA CLAVE: 
 # Obliga a mostrar la consola (donde sale el QR) y no una web
 ENV PORT=7860
-CMD ["node", "index.js"]
+CMD ["npm", "start"]
